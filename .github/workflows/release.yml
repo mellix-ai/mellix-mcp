@@ -2,6 +2,9 @@
 # publishing (no token) through the "npm" environment, which may only stage a release; it goes live when Charlie approves
 # it on npmjs.com (Staged Packages), with his two-factor check. Actions pinned to release commits.
 # The first version (0.0.1) is published by hand, because npm's trusted publisher is set on a package that already exists.
+# npm's trusted publisher for "mellix-mcp" (npmjs.com, package Settings): GitHub Actions, mellix-ai, mellix-mcp, release.yml,
+# environment npm. A stage step failing with E401 means the OIDC exchange failed (no trusted publisher, or one that does not
+# match those fields) and npm fell back to the unset ${NODE_AUTH_TOKEN} that setup-node writes to .npmrc.
 name: Release
 on:
   push:
