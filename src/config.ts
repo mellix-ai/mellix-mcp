@@ -35,7 +35,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
   const apiKey = (env.MELLIX_API_KEY || env.MELLIX_API_TOKEN || "").trim();
   if (!apiKey) {
     throw new ConfigError(
-      "No API key. Set MELLIX_API_KEY (or MELLIX_API_TOKEN) to a key from https://console.mellix.ai.",
+      "No API key. Set MELLIX_API_KEY (or MELLIX_API_TOKEN) to a key from https://console.mellix.com.",
     );
   }
 

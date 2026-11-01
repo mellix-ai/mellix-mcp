@@ -52,7 +52,7 @@
     "type": "git",
     "url": "git+https://github.com/mellix-ai/mellix-mcp.git"
   },
-  "homepage": "https://www.mellix.ai/docs",
+  "homepage": "https://mellix.com/docs",
   "bugs": {
     "url": "https://github.com/mellix-ai/mellix-mcp/issues"
   }

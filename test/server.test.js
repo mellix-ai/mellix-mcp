@@ -174,7 +174,7 @@ test("decide: 422 context_length_exceeded on the questions says to shorten them"
 
 test("decide: 410 for a retired build names the successor", async () => {
   const body = { error: "myles-g-31b-20261024 was retired on 2026-10-27; use myles-g-31b-20261027 instead", type: "model_retired",
-    model: "myles-g-31b-20261024", retired_on: "2026-10-27", successor: "myles-g-31b-20261027", migration_url: "https://mellix.ai/docs/changelog" };
+    model: "myles-g-31b-20261024", retired_on: "2026-10-27", successor: "myles-g-31b-20261027", migration_url: "https://mellix.com/docs/changelog" };
   const { mcp } = await connect([[410, body]]);
   const r = await call(mcp, "decide", { state: "s", model: "myles-g-31b-20261024", questions: { a: { type: "noul", instructions: "A?" } } });
   assert.equal(r.isError, true);
