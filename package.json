@@ -1,0 +1,59 @@
+{
+  "name": "mellix-mcp",
+  "version": "0.0.1",
+  "description": "MCP server for the Mellix Decision API: calibrated decisions from Myles as a tool for agents",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Charlie Hudson",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "mellix-mcp": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/config.test.js test/server.test.js test/stdio.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mellix",
+    "myles",
+    "mcp",
+    "model-context-protocol",
+    "decision",
+    "agents"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "mellix": "0.0.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mellix-ai/mellix-mcp.git"
+  },
+  "homepage": "https://www.mellix.ai/docs",
+  "bugs": {
+    "url": "https://github.com/mellix-ai/mellix-mcp/issues"
+  }
+}
