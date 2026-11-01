@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The package homepage on npm, the README's docs and contact links, and the console address in the missing-key error now go to mellix.com (`https://mellix.com/docs`, `https://mellix.com/contact`, `https://console.mellix.com`). They pointed at mellix.ai, which does not exist.
+
 ## 0.0.1
 
 First release of the Mellix MCP server.

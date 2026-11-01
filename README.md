@@ -10,11 +10,11 @@ Myles is not a chat model. An agent hands it a situation and one or more typed q
 - **Check** that an answer is supported by its sources, or that an action is allowed by a policy.
 - **Rate** severity, urgency or quality on a scale.
 
-The probabilities are calibrated: across many answers given 0.9, about 9 in 10 are right. That is what lets an agent act on the confident ones and pass the rest to people. See [Acting on the answer](https://www.mellix.ai/docs/thresholds).
+The probabilities are calibrated: across many answers given 0.9, about 9 in 10 are right. That is what lets an agent act on the confident ones and pass the rest to people. See [Acting on the answer](https://mellix.com/docs/thresholds).
 
 ## Install
 
-You need Node.js 20 or later and a Mellix API key from the [console](https://console.mellix.ai). Keys work with the hosted API at `https://api.mellix.ai`; a self-hosted deployment serves the same API at its own address.
+You need Node.js 20 or later and a Mellix API key from the [console](https://console.mellix.com). Keys work with the hosted API at `https://api.mellix.ai`; a self-hosted deployment serves the same API at its own address.
 
 ### Claude Desktop
 
@@ -151,7 +151,7 @@ Whether the API is up, and which models have a healthy server. Not billed.
 
 ## Long inputs
 
-Every model has a context window (see [Writing the state](https://www.mellix.ai/docs/state)). When a state is longer:
+Every model has a context window (see [Writing the state](https://mellix.com/docs/state)). When a state is longer:
 
 - **Myles-G 31B** refuses it. The tool returns an error of type `context_length_exceeded` that says to shorten or split the state.
 - **Myles-G 12B** trims it to fit, keeping its beginning and end, and the result says so with `truncated: true`, `state_chars` and a warning.
@@ -181,7 +181,7 @@ The tests use a mocked Decision API only; they never call the production API.
 
 ## Support
 
-Use the [contact form](https://www.mellix.ai/contact) or open an issue in this repository. The API reference is at [mellix.ai/docs](https://www.mellix.ai/docs).
+Use the [contact form](https://mellix.com/contact) or open an issue in this repository. The API reference is at [mellix.com/docs](https://mellix.com/docs).
 
 ## Licence
 
