@@ -1,17 +1,21 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadConfig, ConfigError, DEFAULT_MODEL, DEFAULT_THRESHOLD } from "../dist/index.js";
+import { loadConfig, ConfigError, DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_THRESHOLD } from "../dist/index.js";
 
 const KEY = "mellix_test_secret_key";
 
 test("defaults: hosted API, myles-g-12b, threshold 0.9", () => {
   const c = loadConfig({ MELLIX_API_KEY: KEY });
   assert.equal(c.apiKey, KEY);
-  assert.equal(c.baseURL, "https://api.mellix.ai");
+  assert.equal(c.baseURL, "https://api.mellix.com");
+  assert.equal(DEFAULT_BASE_URL, "https://api.mellix.com");
   assert.equal(c.model, DEFAULT_MODEL);
   assert.equal(c.model, "myles-g-12b");
   assert.equal(c.threshold, DEFAULT_THRESHOLD);
   assert.equal(c.timeoutMs, 60000);
+  assert.equal(c.totalTimeoutMs, 25000);
+  assert.equal(c.lockModel, false);
+  assert.equal(c.lockThreshold, false);
 });
 
 test("MELLIX_API_TOKEN, the SDKs' name, is accepted too; MELLIX_API_KEY wins", () => {
@@ -51,4 +55,24 @@ test("model, threshold and timeout are checked", () => {
   }
   assert.equal(loadConfig({ MELLIX_API_KEY: KEY, MELLIX_TIMEOUT_MS: "120000" }).timeoutMs, 120000);
   assert.throws(() => loadConfig({ MELLIX_API_KEY: KEY, MELLIX_TIMEOUT_MS: "5" }), ConfigError);
+});
+
+test("MELLIX_TIMEOUT_SECONDS sets the total time for a call, from 1 to 600 seconds", () => {
+  assert.equal(loadConfig({ MELLIX_API_KEY: KEY, MELLIX_TIMEOUT_SECONDS: "10" }).totalTimeoutMs, 10000);
+  assert.equal(loadConfig({ MELLIX_API_KEY: KEY, MELLIX_TIMEOUT_SECONDS: "2.5" }).totalTimeoutMs, 2500);
+  for (const t of ["0", "0.5", "601", "", "x", "-5"]) {
+    assert.throws(() => loadConfig({ MELLIX_API_KEY: KEY, MELLIX_TIMEOUT_SECONDS: t }), (e) => e instanceof ConfigError && /MELLIX_TIMEOUT_SECONDS/.test(e.message), t);
+  }
+});
+
+test("MELLIX_LOCK_MODEL and MELLIX_LOCK_THRESHOLD take 1/true or 0/false; anything else is refused", () => {
+  const on = loadConfig({ MELLIX_API_KEY: KEY, MELLIX_LOCK_MODEL: "1", MELLIX_LOCK_THRESHOLD: "true" });
+  assert.equal(on.lockModel, true);
+  assert.equal(on.lockThreshold, true);
+  const off = loadConfig({ MELLIX_API_KEY: KEY, MELLIX_LOCK_MODEL: "0", MELLIX_LOCK_THRESHOLD: "false" });
+  assert.equal(off.lockModel, false);
+  assert.equal(off.lockThreshold, false);
+  for (const name of ["MELLIX_LOCK_MODEL", "MELLIX_LOCK_THRESHOLD"]) {
+    assert.throws(() => loadConfig({ MELLIX_API_KEY: KEY, [name]: "yes" }), (e) => e instanceof ConfigError && e.message.includes(name));
+  }
 });
