@@ -1,6 +1,6 @@
 {
   "name": "mellix-mcp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP server for the Mellix Decision API: calibrated decisions from Myles as a tool for agents",
   "type": "module",
   "license": "Apache-2.0",
