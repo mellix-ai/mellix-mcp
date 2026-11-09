@@ -5,3 +5,9 @@ build/
 python/dist/
 *.tgz
 dist/
+
+# Claude Code: personal settings and notes, never shared. settings.local.json
+# keeps the exact commands approved with "don't ask again", which can include
+# passwords and tokens.
+**/.claude/settings.local.json
+CLAUDE.local.md
